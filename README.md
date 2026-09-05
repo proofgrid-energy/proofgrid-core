@@ -1,7 +1,5 @@
 # ProofGrid Core
 
-![ProofGrid Core banner with the connected blue and emerald grid emblem](https://raw.githubusercontent.com/proofgrid-energy/proofgrid-core/main/assets/brand/readme-banner.png)
-
 [![CI](https://github.com/proofgrid-energy/proofgrid-core/actions/workflows/ci.yml/badge.svg)](https://github.com/proofgrid-energy/proofgrid-core/actions/workflows/ci.yml)
 
 **Common evidence schemas, local validation, and a CLI/SDK for distributed solar records.**
