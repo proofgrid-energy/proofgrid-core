@@ -1,0 +1,887 @@
+{
+  "schema": "../../schemas/0.1/evidence.schema.json",
+  "cases": [
+    {
+      "name": "shared identity and fault: growatt",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "growatt",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "shared identity and fault: dyness",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "dyness",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "shared identity and fault: deye",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "deye",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "reject numeric serial",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": 123,
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "reject whitespace serial",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": " ",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "reject unknown schema version",
+      "valid": false,
+      "data": {
+        "schema_version": "0.2",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "reject arbitrary extension bag",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "vendor_blob": {
+          "anything": true
+        }
+      }
+    },
+    {
+      "name": "reject absent asset id",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        }
+      }
+    },
+    {
+      "name": "reject invalid installation date",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "installation": {
+          "installation_date": "2026-02-30"
+        }
+      }
+    },
+    {
+      "name": "reject measurement without units",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "diagnostics": {
+          "readings": [
+            {
+              "value": 48
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing purchase evidence remains representable",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "purchase": {
+          "proof_of_purchase": [
+            "invoice-1"
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "invoice-1",
+            "evidence_type": "invoice",
+            "state": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing evidence cannot claim content",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "purchase": {
+          "proof_of_purchase": [
+            "invoice-1"
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "invoice-1",
+            "evidence_type": "invoice",
+            "state": "missing",
+            "content_ref": "local:invented-invoice"
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing evidence cannot claim measurement",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "purchase": {
+          "proof_of_purchase": [
+            "invoice-1"
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "invoice-1",
+            "evidence_type": "invoice",
+            "state": "missing",
+            "measurement": {
+              "value": 10,
+              "unit": "V"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "present repair with unverified authorization",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "service_events": [
+          {
+            "event_id": "repair-1",
+            "event_type": "repair",
+            "asset_ref": "battery-1",
+            "state": "present",
+            "authorization": {
+              "state": "unverified",
+              "actor_ref": "tech-1",
+              "manufacturer": "example",
+              "role": "repair"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "authorization cannot be Boolean",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "service_events": [
+          {
+            "event_id": "repair-1",
+            "event_type": "repair",
+            "asset_ref": "battery-1",
+            "state": "present",
+            "authorization": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "authorization requires manufacturer scope",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "service_events": [
+          {
+            "event_id": "repair-1",
+            "event_type": "repair",
+            "asset_ref": "battery-1",
+            "state": "present",
+            "authorization": {
+              "state": "unverified",
+              "actor_ref": "tech-1",
+              "role": "repair"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "represent evidence status present",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "present"
+          }
+        ]
+      }
+    },
+    {
+      "name": "represent evidence status unverified",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "unverified"
+          }
+        ]
+      }
+    },
+    {
+      "name": "represent evidence status verified",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "verified"
+          }
+        ]
+      }
+    },
+    {
+      "name": "represent evidence status expired",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "expired"
+          }
+        ]
+      }
+    },
+    {
+      "name": "represent evidence status revoked",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "revoked"
+          }
+        ]
+      }
+    },
+    {
+      "name": "represent evidence status not_applicable",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "not_applicable"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject invented evidence status",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "evidence": [
+          {
+            "evidence_id": "e-1",
+            "evidence_type": "report",
+            "state": "approved"
+          }
+        ]
+      }
+    },
+    {
+      "name": "preserve replacement, supersession and revoked provenance",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "replacement_events": [
+          {
+            "event_id": "replacement-1",
+            "previous_asset": {
+              "asset_id": "battery-1",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-001",
+              "product_type": "battery"
+            },
+            "replacement_asset": {
+              "asset_id": "battery-2",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-002",
+              "product_type": "battery"
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "old-record",
+            "evidence_type": "commissioning",
+            "state": "superseded",
+            "superseded_by": "corrected-record"
+          },
+          {
+            "evidence_id": "corrected-record",
+            "evidence_type": "commissioning",
+            "state": "present",
+            "provenance": {
+              "issuer_ref": "org-1",
+              "issued_at": "2026-09-01T12:00:00Z",
+              "status": "revoked",
+              "revoked_at": "2026-09-02T12:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacement needs both assets",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "replacement_events": [
+          {
+            "event_id": "replacement-1",
+            "previous_asset": {
+              "asset_id": "battery-1",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-001",
+              "product_type": "battery"
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "old-record",
+            "evidence_type": "commissioning",
+            "state": "superseded",
+            "superseded_by": "corrected-record"
+          },
+          {
+            "evidence_id": "corrected-record",
+            "evidence_type": "commissioning",
+            "state": "present",
+            "provenance": {
+              "issuer_ref": "org-1",
+              "issued_at": "2026-09-01T12:00:00Z",
+              "status": "revoked",
+              "revoked_at": "2026-09-02T12:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "superseded evidence needs replacement reference",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "replacement_events": [
+          {
+            "event_id": "replacement-1",
+            "previous_asset": {
+              "asset_id": "battery-1",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-001",
+              "product_type": "battery"
+            },
+            "replacement_asset": {
+              "asset_id": "battery-2",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-002",
+              "product_type": "battery"
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "old-record",
+            "evidence_type": "commissioning",
+            "state": "superseded"
+          },
+          {
+            "evidence_id": "corrected-record",
+            "evidence_type": "commissioning",
+            "state": "present",
+            "provenance": {
+              "issuer_ref": "org-1",
+              "issued_at": "2026-09-01T12:00:00Z",
+              "status": "revoked",
+              "revoked_at": "2026-09-02T12:00:00Z"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "revoked provenance needs revocation time",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "replacement_events": [
+          {
+            "event_id": "replacement-1",
+            "previous_asset": {
+              "asset_id": "battery-1",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-001",
+              "product_type": "battery"
+            },
+            "replacement_asset": {
+              "asset_id": "battery-2",
+              "manufacturer": "example",
+              "model": "example-model",
+              "serial_number": "EXAMPLE-002",
+              "product_type": "battery"
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "old-record",
+            "evidence_type": "commissioning",
+            "state": "superseded",
+            "superseded_by": "corrected-record"
+          },
+          {
+            "evidence_id": "corrected-record",
+            "evidence_type": "commissioning",
+            "state": "present",
+            "provenance": {
+              "issuer_ref": "org-1",
+              "issued_at": "2026-09-01T12:00:00Z",
+              "status": "revoked"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "calendar date 2024-02-29",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "growatt",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "installation": {
+          "installation_date": "2024-02-29"
+        }
+      }
+    },
+    {
+      "name": "calendar date 2000-02-29",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "growatt",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "installation": {
+          "installation_date": "2000-02-29"
+        }
+      }
+    },
+    {
+      "name": "calendar date 1900-02-29",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "growatt",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "installation": {
+          "installation_date": "1900-02-29"
+        }
+      }
+    },
+    {
+      "name": "calendar date 2026-02-29",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "growatt",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "installation": {
+          "installation_date": "2026-02-29"
+        }
+      }
+    }
+  ]
+}

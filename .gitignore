@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.local-checks/
+.cache/
+*.tgz
+.env
+.env.*
+!.env.example

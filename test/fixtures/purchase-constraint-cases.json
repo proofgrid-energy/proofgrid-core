@@ -1,0 +1,103 @@
+{
+  "schema": "../../schemas/0.1/evidence.schema.json",
+  "constraint": {
+    "type": "object",
+    "required": [
+      "evidence"
+    ],
+    "properties": {
+      "evidence": {
+        "type": "array",
+        "contains": {
+          "type": "object",
+          "required": [
+            "evidence_type",
+            "state",
+            "content_ref"
+          ],
+          "properties": {
+            "evidence_type": {
+              "const": "invoice"
+            },
+            "state": {
+              "enum": [
+                "present",
+                "unverified",
+                "verified"
+              ]
+            },
+            "content_ref": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "synthetic purchase constraint rejects missing evidence",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "purchase": {
+          "proof_of_purchase": [
+            "invoice-1"
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "invoice-1",
+            "evidence_type": "invoice",
+            "state": "missing"
+          }
+        ]
+      }
+    },
+    {
+      "name": "synthetic purchase constraint accepts present evidence",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "record_id": "example-record",
+        "asset": {
+          "asset_id": "battery-1",
+          "manufacturer": "example",
+          "model": "example-model",
+          "serial_number": "EXAMPLE-001",
+          "product_type": "battery"
+        },
+        "fault": {
+          "fault_id": "fault-1",
+          "description": "Synthetic diagnostic fixture"
+        },
+        "purchase": {
+          "proof_of_purchase": [
+            "invoice-1"
+          ]
+        },
+        "evidence": [
+          {
+            "evidence_id": "invoice-1",
+            "evidence_type": "invoice",
+            "state": "present",
+            "content_ref": "local:synthetic-invoice"
+          }
+        ]
+      }
+    }
+  ]
+}

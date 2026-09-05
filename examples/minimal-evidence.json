@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1",
+  "record_id": "example-record",
+  "asset": {
+    "asset_id": "battery-1",
+    "manufacturer": "example",
+    "model": "example-model",
+    "serial_number": "EXAMPLE-001",
+    "product_type": "battery"
+  },
+  "fault": {
+    "fault_id": "fault-1",
+    "description": "Synthetic diagnostic fixture"
+  }
+}
