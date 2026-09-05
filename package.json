@@ -1,0 +1,17 @@
+{
+  "name": "@proofgrid/core",
+  "version": "0.1.0-draft.0",
+  "private": true,
+  "description": "Draft canonical ProofGrid evidence and Rule Pack schemas; no validation runtime yet",
+  "license": "MPL-2.0",
+  "type": "module",
+  "files": ["schemas/0.1/*.json", "docs/contracts.md", "docs/standards-mapping.md", "LICENSING.md", "LICENSES/Apache-2.0.txt"],
+  "exports": {
+    "./schemas/0.1/evidence.schema.json": "./schemas/0.1/evidence.schema.json",
+    "./schemas/0.1/rule-pack.schema.json": "./schemas/0.1/rule-pack.schema.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/proofgrid-energy/proofgrid-core.git"
+  }
+}
