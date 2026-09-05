@@ -1,17 +1,45 @@
 {
   "name": "@proofgrid/core",
-  "version": "0.1.0-draft.0",
+  "version": "0.1.0-draft.1",
   "private": true,
-  "description": "Draft canonical ProofGrid evidence and Rule Pack schemas; no validation runtime yet",
+  "description": "Draft evidence validation and explicitly selected partial Rule Pack experiments",
   "license": "MPL-2.0",
   "type": "module",
-  "files": ["schemas/0.1/*.json", "docs/contracts.md", "docs/standards-mapping.md", "LICENSING.md", "LICENSES/Apache-2.0.txt"],
+  "files": [
+    "schemas/0.1/*.json",
+    "docs/contracts.md",
+    "docs/standards-mapping.md",
+    "LICENSING.md",
+    "LICENSES/Apache-2.0.txt",
+    "dist/src/*",
+    "dist/schemas/0.1/*.json"
+  ],
   "exports": {
     "./schemas/0.1/evidence.schema.json": "./schemas/0.1/evidence.schema.json",
-    "./schemas/0.1/rule-pack.schema.json": "./schemas/0.1/rule-pack.schema.json"
+    "./schemas/0.1/rule-pack.schema.json": "./schemas/0.1/rule-pack.schema.json",
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/proofgrid-energy/proofgrid-core.git"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "test": "npm run build && node --test --test-isolation=none test/*.test.mjs",
+    "test:package": "npm run build && node scripts/prepare-package.mjs && npm pack --ignore-scripts --pack-destination .local-checks/package && npm install --prefix .local-checks/consumer --ignore-scripts --package-lock=false ./.local-checks/package/proofgrid-core-0.1.0-draft.1.tgz && node scripts/check-package-consumer.mjs .local-checks/consumer && tsc --noEmit --module NodeNext --target ES2022 .local-checks/consumer/smoke.ts"
   }
 }

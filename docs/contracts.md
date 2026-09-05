@@ -1,12 +1,12 @@
 # ProofGrid v0.1 contract
 
-Status: M1 draft, 2026-09-05. This document precedes the schema implementation. SPDX-License-Identifier: MPL-2.0.
+Status: M1 draft, 2026-09-05. Schemas and the M1 runtime implement this boundary. SPDX-License-Identifier: MPL-2.0.
 
 Core owns the canonical evidence schema and Rule Pack envelope. Registry owns manufacturer mappings, sources and constraints. Stellar consumes a future versioned manifest; it is not imported by core. No repository imports a sibling's source at runtime.
 
 ## Versions and scope
 
-Canonical records carry `schema_version: "0.1"`. Schemas use JSON Schema 2020-12 and stable URN identifiers resolved from local artifacts, not network downloads. The private local `@proofgrid/core@0.1.0-draft.0` schema-only package exports these schemas at `./schemas/0.1/evidence.schema.json` and `./schemas/0.1/rule-pack.schema.json`; registry will pin a checksummed copy from the package until a release exists. The runtime remains pending. Unknown contract versions must be rejected.
+Canonical records carry `schema_version: "0.1"`. Schemas use JSON Schema 2020-12 and stable URN identifiers resolved from local artifacts, not network downloads. The private local `@proofgrid/core@0.1.0-draft.1` package exports these schemas at `./schemas/0.1/evidence.schema.json` and `./schemas/0.1/rule-pack.schema.json`; registry will pin a checksummed copy from the package until a release exists. The default ESM export provides evidence/pack validation and explicitly selected constraint evaluation. Unknown contract versions must be rejected.
 
 A record is an off-chain container for evidence about one primary asset. Serial numbers are opaque strings: no manufacturer's serial format is imposed by core. Additional assets/components are explicitly typed references. Twelve domains remain first-class: Asset, Purchase, Installation, SystemConfiguration, Fault, Diagnostics, ServiceEvent, ReplacementEvent, Evidence, Actor, Authorization and Provenance.
 
@@ -28,10 +28,14 @@ Every rule has source citations and a required/conditional/contextual classifica
 
 Evaluation must first validate the evidence and pack shapes, then require an explicitly selected matching manufacturer/product/jurisdiction/contract version. Unknown date applicability stays unknown. A partial pack reports results only for its named constraints, never overall warranty readiness or approval. Presence constraints must require a non-missing state as well as data where that state is relevant.
 
-Future runtime must reject unsupported schemas, unresolved external schema references and untrusted executable code. Rule data must not initiate network access. JSON Schema keywords are not an authorization or physical-truth mechanism.
+The runtime rejects unsupported schemas, unresolved external schema references and untrusted executable code. Rule data must not initiate network access. JSON Schema keywords are not an authorization or physical-truth mechanism.
 
 ## M1 acceptance boundary
 
 Fixtures must demonstrate shared serial/fault paths for three manufacturer labels, a typed paired-inverter constraint supplied externally, missing purchase evidence without inference, unverified service authorization, and replacement/revocation/supersession representation. Synthetic fixtures prove structure, while registry source mappings establish factual motivation. Neither proves complete manufacturer policy coverage.
 
 Core schema tests run independently of registry. Registry will test its real partial pack against the pinned core contract. No public CLI, automatic rule resolver, chain SDK, wallet, hash canonicalization protocol or server is required for this slice.
+
+## Runtime selection semantics
+
+The optional selection contains an exact jurisdiction label and ISO date. Asset manufacturer/product type/model must match exactly. Unknown or absent date applicability stays unknown even when a constraint is satisfied. Known effective ranges are inclusive; reversed ranges invalidate the pack. No country-to-region expansion is performed. Explicit mismatches produce no rule outcomes. Unresolved rules remain unresolved, with no overall readiness result. Invalid evidence or packs prevent constraint execution. Reviewed schemas are configuration, not sandboxed arbitrary input. Compilation never fetches URLs.
