@@ -1,8 +1,8 @@
 {
   "name": "@proofgrid/core",
-  "version": "0.1.0-draft.1",
+  "version": "0.2.0-draft.0",
   "private": true,
-  "description": "Draft evidence validation and explicitly selected partial Rule Pack experiments",
+  "description": "Local evidence assessment CLI and SDK with source-backed external rules",
   "license": "MPL-2.0",
   "type": "module",
   "files": [
@@ -31,6 +31,7 @@
     "ajv-formats": "3.0.1"
   },
   "devDependencies": {
+    "@types/node": "24.13.3",
     "typescript": "7.0.2"
   },
   "engines": {
@@ -40,6 +41,9 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "test": "npm run build && node --test --test-isolation=none test/*.test.mjs",
-    "test:package": "npm run build && node scripts/prepare-package.mjs && npm pack --ignore-scripts --pack-destination .local-checks/package && npm install --prefix .local-checks/consumer --ignore-scripts --package-lock=false ./.local-checks/package/proofgrid-core-0.1.0-draft.1.tgz && node scripts/check-package-consumer.mjs .local-checks/consumer && tsc --ignoreConfig --noEmit --module NodeNext --target ES2022 .local-checks/consumer/smoke.ts"
+    "test:package": "npm run build && node scripts/prepare-package.mjs && npm pack --ignore-scripts --pack-destination .local-checks/package && npm install --prefix .local-checks/consumer --ignore-scripts --package-lock=false ./.local-checks/package/proofgrid-core-0.2.0-draft.0.tgz && node scripts/check-package-consumer.mjs .local-checks/consumer && tsc --ignoreConfig --noEmit --module NodeNext --target ES2022 .local-checks/consumer/smoke.ts"
+  },
+  "bin": {
+    "proofgrid": "./dist/src/cli.js"
   }
 }

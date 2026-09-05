@@ -13,12 +13,13 @@ const requireFromConsumer = createRequire(pathToFileURL(join(root, 'consumer.cjs
 const packageRoot = join(root, 'node_modules', '@proofgrid', 'core');
 const metadata = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8'));
 assert.equal(metadata.name, '@proofgrid/core');
-assert.equal(metadata.version, '0.1.0-draft.1');
+assert.equal(metadata.version, '0.2.0-draft.0');
 assert.equal(metadata.private, true, 'Draft must remain protected from publication');
 assert.equal(metadata.license, 'MPL-2.0');
 assert.deepEqual(metadata.dependencies, {ajv: '8.20.0', 'ajv-formats': '3.0.1'});
 
 const allowed = new Set([
+  'dist/src/report.js', 'dist/src/report.d.ts', 'dist/src/cli.js', 'dist/src/cli.d.ts',
   'dist/src/index.js', 'dist/src/index.d.ts', 'dist/src/validate.js', 'dist/src/validate.d.ts',
   'dist/schemas/0.1/evidence.schema.json', 'dist/schemas/0.1/rule-pack.schema.json',
   'package.json', 'README.md', 'LICENSE', 'LICENSING.md', 'LICENSES/Apache-2.0.txt',
@@ -60,3 +61,8 @@ assert.equal(metadata.exports['.'].import, './dist/src/index.js');
 assert.equal(metadata.exports['.'].types, './dist/src/index.d.ts');
 assert.throws(() => requireFromConsumer.resolve('@proofgrid/core/schemas/9.9/evidence.schema.json'), { code: 'ERR_PACKAGE_PATH_NOT_EXPORTED' });
 console.log('PASS isolated runtime and schema package, exact inventory, source bytes and unsupported schema version');
+
+assert.equal(metadata.bin.proofgrid, './dist/src/cli.js');
+assert.ok(readFileSync(entry.replace('index.js','cli.js'),'utf8').startsWith('#!/usr/bin/env node'));
+const cli = await import(pathToFileURL(entry.replace('index.js','cli.js')));
+assert.equal(cli.runCli(['--help'],()=>{}),0);

@@ -11,7 +11,7 @@ export interface EvaluationResult {
   pack: ValidationResult;
   applicability: 'matched' | 'unknown' | 'not_matched';
   coverage: 'partial';
-  rules: { rule_id: string; status: 'satisfied' | 'unsatisfied' | 'unresolved' }[];
+  rules: { rule_id: string; status: 'satisfied' | 'unsatisfied' | 'unresolved'; description?: string; errors?: string[]; citations?: {source_id:string;locator:string}[] }[];
 }
 interface Pack {
   manufacturer: string;
@@ -19,7 +19,7 @@ interface Pack {
   jurisdiction: string;
   effective: { status: 'unknown' | 'known'; from?: string; until?: string };
   sources: { source_id: string }[];
-  rules: { rule_id: string; status: string; citations: { source_id: string }[]; constraint?: object }[];
+  rules: { rule_id: string; description:string; reason?:string; status: string; citations: { source_id: string; locator:string }[]; constraint?: object }[];
 }
 // Strict keyword checking, with type/required composition allowed by JSON Schema.
 function engine() {
@@ -73,6 +73,12 @@ export function evaluateSelectedPack(data: unknown, inputPack: unknown, selectio
     if (dateValidator(selection.date)) result.applicability = selection.date < pack.effective.from! || (pack.effective.until !== undefined && selection.date > pack.effective.until) ? 'not_matched' : 'matched';
   }
   if (result.applicability === 'not_matched') return result;
-  result.rules = pack.rules.map(rule => ({ rule_id: rule.rule_id, status: rule.status === 'unresolved' ? 'unresolved' : engine().compile(rule.constraint!)(data) ? 'satisfied' : 'unsatisfied' }));
+  result.rules = pack.rules.map(rule => {
+    const base={rule_id:rule.rule_id,description:rule.description,citations:rule.citations.map(c=>({...c}))};
+    if(rule.status==='unresolved')return {...base,status:'unresolved',errors:[rule.reason!]};
+    const validate=engine().compile(rule.constraint!);
+    const valid=validate(data);
+    return {...base,status:valid?'satisfied':'unsatisfied',errors:(validate.errors??[]).map(e=>e.instancePath+': '+e.message)};
+  });
   return result;
 }
