@@ -1,0 +1,1120 @@
+{
+  "schema": "../../schemas/0.1/rule-pack.schema.json",
+  "cases": [
+    {
+      "name": "accept explicitly partial pack with unknown effective date",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject pack without jurisdiction",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject pack without sources",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject pack without pack_version",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject pack without product_scope",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject pack without effective",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject unknown contract version",
+      "valid": false,
+      "data": {
+        "schema_version": "1.0",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject rule without source locator",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "reject invented effective date",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "known",
+          "from": "2026-02-30"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unresolved rule cannot execute",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "unresolved",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "reason": "Ambiguous"
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "conditional execution is not implemented in M1",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "conditional",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cannot claim complete coverage",
+      "valid": false,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "complete",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "executable",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "constraint": {
+              "type": "object",
+              "required": [
+                "evidence"
+              ],
+              "properties": {
+                "evidence": {
+                  "type": "array",
+                  "contains": {
+                    "type": "object",
+                    "required": [
+                      "evidence_type",
+                      "state",
+                      "content_ref"
+                    ],
+                    "properties": {
+                      "evidence_type": {
+                        "const": "invoice"
+                      },
+                      "state": {
+                        "enum": [
+                          "present",
+                          "unverified",
+                          "verified"
+                        ]
+                      },
+                      "content_ref": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    },
+    {
+      "name": "preserve unresolved rule without a constraint",
+      "valid": true,
+      "data": {
+        "schema_version": "0.1",
+        "pack_id": "synthetic-test",
+        "pack_version": "0.1.0-draft",
+        "manufacturer": "example",
+        "product_scope": {
+          "product_type": "battery",
+          "models": [
+            "example-model"
+          ]
+        },
+        "jurisdiction": "example",
+        "effective": {
+          "status": "unknown",
+          "reason": "Synthetic fixture has no policy effective date"
+        },
+        "sources": [
+          {
+            "source_id": "example-source",
+            "title": "Synthetic source, not manufacturer policy",
+            "url": "https://example.com/synthetic",
+            "document_version": null,
+            "reviewed_at": "2026-09-05"
+          }
+        ],
+        "coverage": "partial",
+        "limitations": [
+          "Synthetic test only"
+        ],
+        "rules": [
+          {
+            "rule_id": "invoice-presence",
+            "description": "Synthetic invoice presence constraint",
+            "classification": "required",
+            "status": "unresolved",
+            "citations": [
+              {
+                "source_id": "example-source",
+                "locator": "Synthetic section"
+              }
+            ],
+            "reason": "Source ambiguity"
+          }
+        ],
+        "revision_history": [
+          {
+            "version": "0.1.0-draft",
+            "reviewed_at": "2026-09-05",
+            "summary": "Synthetic fixture"
+          }
+        ]
+      }
+    }
+  ]
+}

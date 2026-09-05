@@ -1,0 +1,710 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:proofgrid:schema:evidence:0.1",
+  "title": "ProofGrid Evidence v0.1",
+  "description": "Off-chain structure; validity does not establish completeness, authorization or physical truth.",
+  "$comment": "SPDX-License-Identifier: MPL-2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "asset": {
+      "$ref": "#/$defs/Asset"
+    },
+    "purchase": {
+      "$ref": "#/$defs/Purchase"
+    },
+    "installation": {
+      "$ref": "#/$defs/Installation"
+    },
+    "system_configuration": {
+      "$ref": "#/$defs/SystemConfiguration"
+    },
+    "fault": {
+      "$ref": "#/$defs/Fault"
+    },
+    "diagnostics": {
+      "$ref": "#/$defs/Diagnostics"
+    },
+    "service_events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ServiceEvent"
+      }
+    },
+    "replacement_events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ReplacementEvent"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      }
+    },
+    "actors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Actor"
+      }
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_id",
+    "asset"
+  ],
+  "$defs": {
+    "Asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "manufacturer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "serial_number": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "product_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "specification_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "required": [
+        "asset_id",
+        "manufacturer",
+        "product_type"
+      ]
+    },
+    "Purchase": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "purchase_date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^(?:[0-9]{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12][0-9]|3[01])|(?:0[469]|11)-(?:0[1-9]|[12][0-9]|30)|02-(?:0[1-9]|1[0-9]|2[0-8]))|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:[02468][048]|[13579][26])00)-02-29)$"
+        },
+        "seller_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "purchase_country": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "proof_of_purchase": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "Installation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "installation_date": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^(?:[0-9]{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12][0-9]|3[01])|(?:0[469]|11)-(?:0[1-9]|[12][0-9]|30)|02-(?:0[1-9]|1[0-9]|2[0-8]))|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:[02468][048]|[13579][26])00)-02-29)$"
+        },
+        "installer_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "country": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "location_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
+    "SystemConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Asset"
+          }
+        },
+        "panels_per_string": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "string_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "connection": {
+          "enum": [
+            "series",
+            "parallel",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "grid_category": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "grid_voltage": {
+          "$ref": "#/$defs/Measurement"
+        },
+        "grid_frequency": {
+          "$ref": "#/$defs/Measurement"
+        },
+        "load": {
+          "$ref": "#/$defs/Measurement"
+        },
+        "operating_mode": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "Measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "measured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ]
+    },
+    "Fault": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fault_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "error_code": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "occurred_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "required": [
+        "fault_id"
+      ]
+    },
+    "Diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "readings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          }
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "notes_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "ServiceEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "event_type": {
+          "enum": [
+            "inspection",
+            "preventive_maintenance",
+            "diagnostic",
+            "repair",
+            "firmware_update",
+            "commissioning",
+            "decommissioning"
+          ]
+        },
+        "occurred_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "asset_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "actor_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "state": {
+          "enum": [
+            "present",
+            "missing",
+            "unverified",
+            "verified",
+            "expired",
+            "revoked",
+            "superseded",
+            "not_applicable"
+          ]
+        },
+        "authorization": {
+          "$ref": "#/$defs/Authorization"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "event_id",
+        "event_type",
+        "asset_ref",
+        "state"
+      ]
+    },
+    "ReplacementEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "previous_asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "replacement_asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "service_event_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "authorization": {
+          "$ref": "#/$defs/Authorization"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "event_id",
+        "previous_asset",
+        "replacement_asset"
+      ]
+    },
+    "Evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "evidence_type": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "state": {
+          "enum": [
+            "present",
+            "missing",
+            "unverified",
+            "verified",
+            "expired",
+            "revoked",
+            "superseded",
+            "not_applicable"
+          ]
+        },
+        "content_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "content_hash": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": {
+              "const": "sha256"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ]
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "measurement": {
+          "$ref": "#/$defs/Measurement"
+        },
+        "superseded_by": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "evidence_type",
+        "state"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "missing",
+                  "not_applicable"
+                ]
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "content_ref"
+                  ]
+                },
+                {
+                  "required": [
+                    "content_hash"
+                  ]
+                },
+                {
+                  "required": [
+                    "measurement"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "superseded"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "superseded_by"
+            ]
+          }
+        }
+      ]
+    },
+    "Actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "actor_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "role": {
+          "enum": [
+            "owner",
+            "installer",
+            "technician",
+            "dealer",
+            "distributor",
+            "manufacturer",
+            "service_centre",
+            "inspector",
+            "software_provider"
+          ]
+        },
+        "organization_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "contact_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "actor_id",
+        "role"
+      ]
+    },
+    "Authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "verified",
+            "unverified",
+            "unauthorized",
+            "not_required",
+            "unknown"
+          ]
+        },
+        "actor_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "manufacturer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "authorizing_actor_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "valid_from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "valid_until": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "required": [
+        "state",
+        "actor_ref",
+        "manufacturer",
+        "role"
+      ]
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issuer_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "attestation_ref": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "revoked",
+            "superseded",
+            "unknown"
+          ]
+        },
+        "revoked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "superseded_by": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "issuer_ref",
+        "issued_at",
+        "status"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "revoked"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "revoked_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "superseded"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "superseded_by"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
