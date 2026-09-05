@@ -6,7 +6,7 @@ Core owns the canonical evidence schema and Rule Pack envelope. Registry owns ma
 
 ## Versions and scope
 
-Canonical records carry `schema_version: "0.1"`. Schemas use JSON Schema 2020-12 and stable URN identifiers resolved from local artifacts, not network downloads. The private local `@proofgrid/core@0.1.0-draft.1` package exports these schemas at `./schemas/0.1/evidence.schema.json` and `./schemas/0.1/rule-pack.schema.json`; registry will pin a checksummed copy from the package until a release exists. The default ESM export provides evidence/pack validation and explicitly selected constraint evaluation. Unknown contract versions must be rejected.
+Canonical records carry `schema_version: "0.1"`. Schemas use JSON Schema 2020-12 and stable URN identifiers resolved from local artifacts, not network downloads. The private local `@proofgrid/core@0.2.0-draft.0` package exports these schemas at `./schemas/0.1/evidence.schema.json` and `./schemas/0.1/rule-pack.schema.json`; registry will pin a checksummed copy from the package until a release exists. The default ESM export provides evidence/pack validation and explicitly selected constraint evaluation. Unknown contract versions must be rejected.
 
 A record is an off-chain container for evidence about one primary asset. Serial numbers are opaque strings: no manufacturer's serial format is imposed by core. Additional assets/components are explicitly typed references. Twelve domains remain first-class: Asset, Purchase, Installation, SystemConfiguration, Fault, Diagnostics, ServiceEvent, ReplacementEvent, Evidence, Actor, Authorization and Provenance.
 
@@ -39,3 +39,7 @@ Core schema tests run independently of registry. Registry will test its real par
 ## Runtime selection semantics
 
 The optional selection contains an exact jurisdiction label and ISO date. Asset manufacturer/product type/model must match exactly. Unknown or absent date applicability stays unknown even when a constraint is satisfied. Known effective ranges are inclusive; reversed ranges invalidate the pack. No country-to-region expansion is performed. Explicit mismatches produce no rule outcomes. Unresolved rules remain unresolved, with no overall readiness result. Invalid evidence or packs prevent constraint execution. Reviewed schemas are configuration, not sandboxed arbitrary input. Compilation never fetches URLs.
+
+## Assessment report v0.1
+
+The CLI and assessEvidence SDK accept an explicit pack or a finite catalog. Selection is exact and ambiguity is retained; no latest-version or country-to-region guessing occurs. Reports separate invalid, incomplete, review_required and scoped_checks_met, with per-rule citations/errors and in-record reference findings. Complete policy coverage, conditional request-context resolution and external references remain outside this report contract.
