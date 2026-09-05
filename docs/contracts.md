@@ -6,7 +6,7 @@ Core owns the canonical evidence schema and Rule Pack envelope. Registry owns ma
 
 ## Versions and scope
 
-Canonical records carry `schema_version: "0.1"`. Schemas use JSON Schema 2020-12 and stable URN identifiers resolved from local artifacts, not network downloads. A future core package will export these schemas; registry will pin a checksummed copy from the package until a release exists. Unknown contract versions must be rejected.
+Canonical records carry `schema_version: "0.1"`. Schemas use JSON Schema 2020-12 and stable URN identifiers resolved from local artifacts, not network downloads. The private local `@proofgrid/core@0.1.0-draft.0` schema-only package exports these schemas at `./schemas/0.1/evidence.schema.json` and `./schemas/0.1/rule-pack.schema.json`; registry will pin a checksummed copy from the package until a release exists. The runtime remains pending. Unknown contract versions must be rejected.
 
 A record is an off-chain container for evidence about one primary asset. Serial numbers are opaque strings: no manufacturer's serial format is imposed by core. Additional assets/components are explicitly typed references. Twelve domains remain first-class: Asset, Purchase, Installation, SystemConfiguration, Fault, Diagnostics, ServiceEvent, ReplacementEvent, Evidence, Actor, Authorization and Provenance.
 
