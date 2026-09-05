@@ -40,6 +40,6 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "test": "npm run build && node --test --test-isolation=none test/*.test.mjs",
-    "test:package": "npm run build && node scripts/prepare-package.mjs && npm pack --ignore-scripts --pack-destination .local-checks/package && npm install --prefix .local-checks/consumer --ignore-scripts --package-lock=false ./.local-checks/package/proofgrid-core-0.1.0-draft.1.tgz && node scripts/check-package-consumer.mjs .local-checks/consumer && tsc --noEmit --module NodeNext --target ES2022 .local-checks/consumer/smoke.ts"
+    "test:package": "npm run build && node scripts/prepare-package.mjs && npm pack --ignore-scripts --pack-destination .local-checks/package && npm install --prefix .local-checks/consumer --ignore-scripts --package-lock=false ./.local-checks/package/proofgrid-core-0.1.0-draft.1.tgz && node scripts/check-package-consumer.mjs .local-checks/consumer && tsc --ignoreConfig --noEmit --module NodeNext --target ES2022 .local-checks/consumer/smoke.ts"
   }
 }
