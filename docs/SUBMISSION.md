@@ -8,7 +8,7 @@ TypeScript library and CLI validate versioned evidence and rule-pack schemas, ev
 
 ## Reproduce and evidence
 
-Node 24+; npm ci, npm run typecheck, npm test, npm run test:package. Record actual October 8 check results in VERIFICATION_OCT09.md.
+Node 24+; npm ci, npm run typecheck, npm test, npm run test:package. October 8: typecheck, 82 tests and isolated runtime/schema/TypeScript package consumer passed on Node 24.15.0.
 
 ## Supported scope
 

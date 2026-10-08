@@ -151,3 +151,12 @@ medium; planning only. Actual Wave complexity and enrollment are set by maintain
 ## Contribution
 
 Open a focused feat/fix/test/docs branch. PRs explain behavior and actual validation and include Closes #<issue_id>. Follow CONTRIBUTING.md and SECURITY.md.
+
+## Published contributor issues
+
+- [Bound external evidence and rule-pack input sizes](https://github.com/proofgrid-energy/proofgrid-core/issues/1) — proposed medium.
+- [Add schema migration compatibility fixtures](https://github.com/proofgrid-energy/proofgrid-core/issues/2) — proposed medium.
+- [Add tamper-resistant provenance for rule-pack captures](https://github.com/proofgrid-energy/proofgrid-core/issues/3) — proposed high.
+- [Exercise independently packed CLI and declaration consumers](https://github.com/proofgrid-energy/proofgrid-core/issues/4) — proposed medium.
+- [Document unresolved rule assessment with a Stellar consumer](https://github.com/proofgrid-energy/proofgrid-core/issues/5) — proposed trivial.
+- [Add hostile reference and schema failure fixtures](https://github.com/proofgrid-energy/proofgrid-core/issues/6) — proposed medium.
